@@ -49,6 +49,7 @@ namespace VaccinePuppeteer
 
             // Click 1st Button
             await page.WaitForSelectorAsync("#continue");
+            await Task.Delay(2000);
             await page.ClickAsync("#continue");
 
             // Click 2nd Button
