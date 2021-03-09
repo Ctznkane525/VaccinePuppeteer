@@ -15,6 +15,7 @@ namespace VaccinePuppeteer
 
         public override async Task ExecuteAsync()
         {
+            Console.WriteLine("Beginning RiteAid.ExecuteAsync");
             var browser = await this.GetBrowserAsync();
             Page page = await browser.NewPageAsync();
             await page.GoToAsync("https://www.riteaid.com/pharmacy/covid-qualifier");
@@ -73,8 +74,9 @@ namespace VaccinePuppeteer
             await Task.Delay(5000);
             if (currentUrl != page.Url)
             {
-                await AlertAsync();
+                await AlertAsync("RiteAid");
             }
+            Console.WriteLine("Ending RiteAid.ExecuteAsync");
         }
         public AppSettingsRiteAid RiteAidSettings { get; }
     }

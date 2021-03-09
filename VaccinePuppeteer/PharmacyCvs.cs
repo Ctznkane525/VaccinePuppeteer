@@ -18,6 +18,7 @@ namespace VaccinePuppeteer
 
         public override async Task ExecuteAsync()
         {
+            Console.WriteLine("Beginning Cvs.ExecuteAsync");
             var browser = await this.GetBrowserAsync();
             Page page = await browser.NewPageAsync();
 
@@ -54,16 +55,16 @@ namespace VaccinePuppeteer
                     Console.WriteLine($"Store: {storeName}, Status: {status}");
                     if ( status.ToString() == "Available" && !alerted)
                     {
-                        await AlertAsync();
+                        await AlertAsync("CVS");
                         alerted = true;
                     }
                 }
                 
             }
-            
 
-            Console.WriteLine("CVS Complete: " + DateTime.Now.ToString());
-           
+
+            Console.WriteLine("Ending Cvs.ExecuteAsync");
+
         }
 
     }

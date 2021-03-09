@@ -19,6 +19,7 @@ namespace VaccinePuppeteer
 
         public override async Task ExecuteAsync()
         {
+            Console.WriteLine("Beginning Walgreens.ExecuteAsync");
             var browser = await this.GetBrowserAsync();
             Page page = await browser.NewPageAsync();
             await page.GoToAsync("https://www.walgreens.com/findcare/vaccination/covid-19");
@@ -39,7 +40,9 @@ namespace VaccinePuppeteer
             var alertItem = await page.QuerySelectorAsync(".alert");
             var alertText = await (await alertItem.GetPropertyAsync("innerText")).JsonValueAsync();
             if (!alertText.ToString().Contains("unavailable"))
-                await AlertAsync();
+                await AlertAsync("Walgreens");
+
+            Console.WriteLine("Ending Walgreens.ExecuteAsync");
 
         }
 

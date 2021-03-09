@@ -39,7 +39,7 @@ namespace VaccinePuppeteer
                 Browser = await Puppeteer.LaunchAsync(new LaunchOptions
                 {
                     DefaultViewport = null,
-                    Headless = false, //;true,
+                    Headless = true, //;true,
                     Args = new string[] {"--start-maximized"}
                 });
             }
@@ -47,8 +47,9 @@ namespace VaccinePuppeteer
             return Browser;
         }
 
-        public async Task AlertAsync()
+        public async Task AlertAsync(string source)
         {
+            Console.WriteLine($"Alerting On {source}");
             await Task.Run(() => {
 
                 for (int i = 0; i < 2; i++)
