@@ -3,4 +3,4 @@
 ################################################################################
 
 /VaccinePuppeteer/obj
-/VaccinePuppeteer/bin/Debug/netcoreapp3.1
+/VaccinePuppeteer/bin/Debug/netcoreapp3.1/.local-chromium
