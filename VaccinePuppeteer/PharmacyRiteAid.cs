@@ -61,9 +61,13 @@ namespace VaccinePuppeteer
             var currentUrl = page.Url;
             await Task.Delay(2000);
             await firstButton.ClickAsync();
+            await Task.Delay(2000);
 
             // Continue
             await page.WaitForSelectorAsync("#continue");
+            await Task.Delay(1000);
+            await page.ClickAsync("#continue");
+            await Task.Delay(1000);
             await page.ClickAsync("#continue");
 
             await Task.Delay(5000);
