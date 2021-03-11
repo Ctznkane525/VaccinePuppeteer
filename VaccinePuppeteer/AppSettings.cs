@@ -10,7 +10,7 @@ namespace VaccinePuppeteer
 
         public string WalgreensInput { get; set; }
 
-        public int RefreshRate { get; set; }
+        public decimal RefreshRate { get; set; }
 
         public AppSettingsRiteAid RiteAid { get; set; }
 
@@ -22,12 +22,12 @@ namespace VaccinePuppeteer
 
     public class AppSettingsRiteAid
     {
-        public string Dob { get; set; }
-        public string Occupation { get; set; }
+        //public string Dob { get; set; }
+       // public string Occupation { get; set; }
         public string State { get; set; }
-        public string City { get; set; }
-        public string Zip { get; set; }
-        public string MedicalConditions { get; set; }
+        //public string City { get; set; }
+        //public string Zip { get; set; }
+        //public string MedicalConditions { get; set; }
         public Boolean Enabled { get; set; }
        
     }

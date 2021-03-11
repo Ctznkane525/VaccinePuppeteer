@@ -63,7 +63,7 @@ namespace VaccinePuppeteer
             }
 
 
-            Console.WriteLine("Ending Cvs.ExecuteAsync");
+            Console.WriteLine($"Ending Cvs.ExecuteAsync: {DateTime.Now.ToString()}");
 
         }
 

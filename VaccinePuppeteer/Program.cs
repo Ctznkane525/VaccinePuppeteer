@@ -38,7 +38,7 @@ namespace VaccinePuppeteer
                 }
 
                 // Delaying Till Next Evaluation
-                await Task.Delay(60 * 1000 * a.RefreshRate);
+                await Task.Delay(Convert.ToInt32(60 * 1000 * a.RefreshRate));
             }
 
         }

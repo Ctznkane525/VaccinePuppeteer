@@ -39,7 +39,7 @@ namespace VaccinePuppeteer
                 Browser = await Puppeteer.LaunchAsync(new LaunchOptions
                 {
                     DefaultViewport = null,
-                    Headless = false, //;true,
+                    Headless = true, //;true,
                     Args = new string[] {"--start-maximized"}
                 });
             }

@@ -15,9 +15,36 @@ namespace VaccinePuppeteer
 
         public override async Task ExecuteAsync()
         {
-            Console.WriteLine("Beginning RiteAid.ExecuteAsync");
+            Console.WriteLine($"Beginning RiteAid.ExecuteAsync {DateTime.Now}");
             var browser = await this.GetBrowserAsync();
             Page page = await browser.NewPageAsync();
+
+            await page.GoToAsync("https://www.vaxxmax.com/riteaid");
+            await page.TypeAsync("#zipcode", this.RiteAidSettings.Zip);
+            await page.SelectAsync("#state-select-rite-aid", new string[] { this.RiteAidSettings.State });
+            await Task.Delay(5000);
+
+            var rows = await page.QuerySelectorAllAsync(".dataTable tr");
+            foreach(var row in rows)
+            {
+                var cells = await row.QuerySelectorAllAsync("td");
+                if (cells.Length >= 9)
+                {
+                    var name = Convert.ToString((await (await cells[3].GetPropertyAsync("innerText")).JsonValueAsync()).ToString());
+                    var distance = Convert.ToInt32((await (await cells[8].GetPropertyAsync("innerText")).JsonValueAsync()).ToString());
+                    Console.WriteLine($"Name {name}, Distance {distance}");
+                    if (distance <= 30)
+                    {
+                        await AlertAsync("RiteAid");
+                    }
+                }
+            }
+
+
+            var x = "2";
+            //await page. // ".dataTable tr td:nth-child(9)"
+
+            /*
             await page.GoToAsync("https://www.riteaid.com/pharmacy/covid-qualifier");
 
             // Text Inputs
@@ -77,7 +104,9 @@ namespace VaccinePuppeteer
             {
                 await AlertAsync("RiteAid");
             }
-            Console.WriteLine("Ending RiteAid.ExecuteAsync");
+*/
+
+            Console.WriteLine($"Ending RiteAid.ExecuteAsync {DateTime.Now}");
         }
         public AppSettingsRiteAid RiteAidSettings { get; }
     }
