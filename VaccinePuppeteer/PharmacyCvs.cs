@@ -9,20 +9,52 @@ namespace VaccinePuppeteer
     public class PharmacyCvs : PharmacyBase
     {
 
-        public PharmacyCvs(string stateCode)
+        public PharmacyCvs(AppSettingsCvs cvsSettings)
         {
-            Input = stateCode;
+            CvsSettings = cvsSettings;
         }
 
-        public string Input { get; set; }
+        public AppSettingsCvs CvsSettings { get; set; }
 
         public override async Task ExecuteAsync()
         {
             Console.WriteLine("Beginning Cvs.ExecuteAsync");
+
             var browser = await this.GetBrowserAsync();
             Page page = await browser.NewPageAsync();
 
+            // CVS Page Bug
+            await page.GoToAsync("https://www.vaxxmax.com/cvs");
+            await Task.Delay(2000);
+            await page.GoToAsync("https://www.vaxxmax.com/cvs");
+            await Task.Delay(2000);
+
+
+            //await page.TypeAsync("#zipcode", this.CvsSettings.Zip); - No Zip on CVS Page
+            await page.SelectAsync("#state-select-cvs", new string[] { this.CvsSettings.State });
+            await Task.Delay(5000);
+
+            var rows = await page.QuerySelectorAllAsync(".dataTable tr");
+            foreach (var row in rows)
+            {
+                var cells = await row.QuerySelectorAllAsync("td");
+                if (cells.Length >= 8)
+                {
+                    var name = Convert.ToString((await (await cells[1].GetPropertyAsync("innerText")).JsonValueAsync()).ToString());
+                    var distance = Convert.ToInt32((await (await cells[7].GetPropertyAsync("innerText")).JsonValueAsync()).ToString());
+                    Console.WriteLine($"Name {name}, Distance {distance}");
+                    if (distance <= 30)
+                    {
+                        await AlertAsync("Cvs");
+                    }
+                }
+            }
+
             /*
+            var browser = await this.GetBrowserAsync();
+            Page page = await browser.NewPageAsync();
+
+            
             var url = "https://www.cvs.com/vaccine/intake/store/cvd-schedule?icid=coronavirus-lp-vaccine-nj-statetool";
             await page.GoToAsync(url);
 
@@ -33,7 +65,7 @@ namespace VaccinePuppeteer
             {
                 await Alert();
             }
-            */
+            
 
 
             
@@ -62,7 +94,7 @@ namespace VaccinePuppeteer
                 
             }
 
-
+            */
             Console.WriteLine($"Ending Cvs.ExecuteAsync: {DateTime.Now.ToString()}");
 
         }

@@ -26,7 +26,7 @@ namespace VaccinePuppeteer
        // public string Occupation { get; set; }
         public string State { get; set; }
         //public string City { get; set; }
-        //public string Zip { get; set; }
+        public string Zip { get; set; }
         //public string MedicalConditions { get; set; }
         public Boolean Enabled { get; set; }
        
@@ -34,8 +34,14 @@ namespace VaccinePuppeteer
 
     public class AppSettingsCvs
     {
+        //public string Dob { get; set; }
+        // public string Occupation { get; set; }
+        public string State { get; set; }
+        //public string City { get; set; }
+        public string Zip { get; set; }
+        //public string MedicalConditions { get; set; }
         public Boolean Enabled { get; set; }
-        public string Input { get; set; }
+
     }
 
     public class AppSettingsWalgreens

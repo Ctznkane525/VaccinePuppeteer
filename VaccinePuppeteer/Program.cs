@@ -70,7 +70,7 @@ namespace VaccinePuppeteer
         {
             if (a.Cvs.Enabled)
             {
-                using (PharmacyBase p = new PharmacyCvs(a.Cvs.Input))
+                using (PharmacyBase p = new PharmacyCvs(a.Cvs))
                 {
                     await p.ExecuteAsync();
                 }
